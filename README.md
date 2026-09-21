@@ -6,7 +6,7 @@ købe det billigt eller gratis — en slags "DBA for byggematerialer".
 
 Lavet som Godkendelsesopgave 1 (individuel) i INNT, E26.
 
-🔗 **Repo:** [github.com/olol24af/byggemarked-app](https://github.com/olol24af/byggemarked-app)
+🔗 **Repo:** [github.com/olol24af/byggemarked](https://github.com/olol24af/byggemarked)
 
 ## 🎥 Demovideo
 
