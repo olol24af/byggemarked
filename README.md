@@ -10,7 +10,7 @@ Lavet som Godkendelsesopgave 1 (individuel) i INNT, E26.
 
 ## 🎥 Demovideo
 
-> LINK TIL DEMOVIDEO INDSÆTTES HER (fx YouTube eller en video uploadet til dette GitHub-repo)
+> https://youtu.be/CgzvAY_D80M 
 
 ## 📱 Funktioner
 
