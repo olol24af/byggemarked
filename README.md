@@ -6,18 +6,27 @@ købe det billigt eller gratis — en slags "DBA for byggematerialer".
 
 Lavet som Godkendelsesopgave 1 (individuel) i INNT, E26.
 
-🔗 **Repo:** [github.com/olol24af/byggemarked](https://github.com/olol24af/byggemarked)
+🔗 **Repo:** [github.com/olol24af/byggemarked-app](https://github.com/olol24af/byggemarked-app)
 
 ## 🎥 Demovideo
 
-> https://youtu.be/CgzvAY_D80M 
+> LINK TIL DEMOVIDEO INDSÆTTES HER (fx YouTube eller en video uploadet til dette GitHub-repo)
 
 ## 📱 Funktioner
 
 - **Annoncer** – oversigt over alle annoncer i en liste (FlatList), med tryk-igennem til en detaljeside for hver annonce.
 - **Annonce-detaljer** – ser mængde, pris, stand, lokation og sælger, og kan trykke "Kontakt sælger".
 - **Opret** – formular til at oprette sin egen annonce for overskudsmateriale.
+- **Tilføj billede** *(ny i opgave 2)* – tag et billede med kameraet eller vælg et fra biblioteket, som vises på annoncen.
 - **Min side** – simpel profil der viser de annoncer, man selv har oprettet.
+- **Gemning** *(ny i opgave 2)* – annoncer og billeder gemmes lokalt med AsyncStorage, så de stadig er der, når appen lukkes og åbnes igen.
+
+## 🔁 Ændringer i opgave 2
+
+Feedback fra brugerinddragelsen i opgave 1 viste, at købere savnede billeder af materialet.
+Derfor er der tilføjet en ny skærm (`AddPhotoScreen`), hvor man kan tage eller vælge et billede
+via `expo-image-picker`. Billedet kopieres til appens egen mappe med `expo-file-system`, og alle
+annoncer gemmes nu med `@react-native-async-storage/async-storage` i stedet for kun at ligge i hukommelsen.
 
 ## 🗂️ Struktur
 
@@ -25,14 +34,16 @@ Lavet som Godkendelsesopgave 1 (individuel) i INNT, E26.
 ByggeMarked-app/
 ├── App.js                        # Navigation (bottom tabs + nested stack) og providers
 ├── components/
+│   ├── CreateStackNavigator.js   # Stack: Opret annonce -> Tilføj billede
 │   ├── HomeStackNavigator.js     # Stack: Oversigt -> Annonce
 │   ├── ListingCard.js            # Ét annonce-kort i listen
 │   └── PrimaryButton.js          # Genbrugelig knap (primary/secondary)
 ├── context/
-│   └── ListingsContext.js        # Delt state for annoncer på tværs af faner
+│   └── ListingsContext.js        # Delt state for annoncer + gemning med AsyncStorage
 ├── data/
 │   └── materials.js              # Eksempeldata (array-liste)
 ├── screens/
+│   ├── AddPhotoScreen.js         # Tag/vælg billede til annoncen (opgave 2)
 │   ├── HomeScreen.js             # Liste over annoncer
 │   ├── ListingDetailScreen.js    # Detaljevisning
 │   ├── CreateListingScreen.js    # Opret annonce (formular)
