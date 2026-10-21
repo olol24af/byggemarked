@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Image, ScrollView, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, ScrollView, Text, TextInput, View } from 'react-native';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { useListings } from '../context/ListingsContext';
 import PrimaryButton from '../components/PrimaryButton';
@@ -12,25 +12,14 @@ const EMPTY_FORM = {
   condition: '',
   location: '',
   description: '',
-  photoUri: null,
 };
 
 // Formular til at oprette en ny annonce. Indeholder de to obligatoriske
 // knapper: "Opret annonce" (primær, gemmer annoncen) og "Ryd formular"
 // (sekundær, nulstiller felterne) - begge med en reel funktion.
-// I opgave 2 er der tilføjet en knap til AddPhotoScreen, så annoncen kan få et billede.
-export default function CreateListingScreen({ navigation, route }) {
+export default function CreateListingScreen({ navigation }) {
   const { addListing } = useListings();
   const [form, setForm] = useState(EMPTY_FORM);
-
-  // Når brugeren kommer tilbage fra AddPhotoScreen, ligger billedet i route.params
-  const returnedPhotoUri = route.params?.photoUri;
-  useEffect(() => {
-    if (returnedPhotoUri) {
-      updateField('photoUri', returnedPhotoUri);
-      navigation.setParams({ photoUri: undefined });
-    }
-  }, [returnedPhotoUri]);
 
   function updateField(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -54,7 +43,6 @@ export default function CreateListingScreen({ navigation, route }) {
       condition: form.condition.trim() || 'Ikke angivet',
       location: form.location.trim() || 'Ikke angivet',
       description: form.description.trim() || 'Ingen beskrivelse tilføjet.',
-      photoUri: form.photoUri,
     });
 
     Alert.alert('Annonce oprettet', 'Din annonce er nu synlig under "Annoncer".');
@@ -125,14 +113,6 @@ export default function CreateListingScreen({ navigation, route }) {
         multiline
         value={form.description}
         onChangeText={(text) => updateField('description', text)}
-      />
-
-      <Text style={GlobalStyle.inputLabel}>Billede</Text>
-      {form.photoUri && <Image source={{ uri: form.photoUri }} style={GlobalStyle.photoPreview} />}
-      <PrimaryButton
-        title={form.photoUri ? 'Skift billede' : 'Tilføj billede'}
-        variant="secondary"
-        onPress={() => navigation.navigate('Tilføj billede')}
       />
 
       <PrimaryButton title="Opret annonce" onPress={handleSubmit} />
